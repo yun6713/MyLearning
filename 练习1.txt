@@ -77,8 +77,79 @@ dos查看文件，dir /s,/w,/p
 
 多线程？
 
-用户修改，删除
+用户修改，删除；session管理用户登录
+获取session，Session session = SecurityUtils.getSubject().getSession();
+从session获取用户
+
 springboot动态页面，thymeleaf。
+
+log输出
+导包slf4j;
+private static Logger log = LoggerFactory.getLogger(类名.class);
+默认输出到控制台；
+配置输出：logging.file = myLog.log；位于项目根目录
+
+同一账号不能重复登录
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
