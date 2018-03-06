@@ -77,7 +77,8 @@ dos查看文件，dir /s,/w,/p
 
 多线程？
 
-
+用户修改，删除
+springboot动态页面，thymeleaf。
 
 
 
