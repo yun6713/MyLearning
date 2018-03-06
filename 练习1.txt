@@ -80,6 +80,7 @@ dos查看文件，dir /s,/w,/p
 用户修改，删除；session管理用户登录
 获取session，Session session = SecurityUtils.getSubject().getSession();
 从session获取用户
+session.stop();删除登录session
 
 springboot动态页面，thymeleaf。
 
