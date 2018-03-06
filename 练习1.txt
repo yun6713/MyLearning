@@ -1,0 +1,84 @@
+1，新建springboot项目，测试。
+2，获取数据库内user信息，编写实体类
+安装mysql数据库，报msvcr120.dll丢失？？？
+3，编写repository、service；测试
+4，controller，测试
+MD5加密密码；？？？
+team_id注解为不插入，更改为可插入
+增删改查操作
+5，前端页面整合
+spring boot返回页面，
+HTML页面：在application.yml中spring下添加：thymeleaf: prefix: classpath:/templates；pom中添加依赖：spring-boot-starter-thymeleaf
+网页放resource目录templates下，静态资源放static下。Controller返回网页名
+jsp页面：注释掉thymeleaf，导包、配置前缀后缀；无法显示HTML页面
+无法同时支持html、jsp？？？
+6，测试swagger
+导包springfox-swagger2，springfox-swagger-ui
+创建swagger类，
+源码中添加注解信息，用于显示
+
+
+
+
+
+
+  thymeleaf:
+    prefix: classpath:/templates
+
+
+
+
+window命令处理程序已停止工作？？？
+
+
+git,maven打包、插件、pom文件标签
+
+springboot maven打包：配置maven插件，
+  <plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>  
+      <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments> 
+      <fork>true</fork>  
+    </configuration>
+  </plugin>
+maven clean package；打包好的文件位于target目录下；java -jar MyWork.jar，运行打包文件。
+
+init.sql不能执行，可建表？
+指定data属性时，表可创建，但无法插入sql
+指定schema属性时，没有创建表，直接执行sql；报错
+使用schema属性，将建表语句插入即可。注意：使用CREATE TABLE IF NOT EXISTS；外键名/唯一键名不可重复。
+
+ddl-auto使用create/create-drop后，无法插入数据？
+validate               加载hibernate时，验证创建数据库表结构
+create                  每次加载hibernate，重新创建数据库表结构，这就是导致数据库表数据丢失的原因。
+create-drop        加载hibernate时创建，退出是删除表结构
+update                 加载hibernate自动更新数据库结构
+
+更改h2数据库连接为server模式，控制台、eclipse可同时连接
+
+MD5加密？
+String password = new SimpleHash("MD5",password,salt,2).toHex();md5加密两次
+
+注册的用户无法登陆
+可登陆，未添加角色；无权限
+凭据管理器用于加密登陆的密码，以匹配数据库密码。
+
+更改端口号
+server.port: 8081
+java -jar MyWork.jar --server.port=8081
+
+双击运行可执行jar包，停止javaw进程即可。
+
+配置数据库连接池，spring.datasource.tomcat...
+
+打包后支持swagger。
+dos查看文件，dir /s,/w,/p
+
+多线程？
+
+
+
+
+
+

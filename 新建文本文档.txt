@@ -1,0 +1,89 @@
+Description	Resource	Path	Location	Type
+Archive for required library: 'C:/Users/Administrator/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.27/tomcat-embed-core-8.5.27.jar' in project 'demo4' cannot be read or is not a valid ZIP file	demo4		Build path	Build Path Problem
+
+
+Description	Resource	Path	Location	Type
+The project cannot be built until build path errors are resolved	demo4		Unknown	Java Problem
+
+Description	Resource	Path	Location	Type
+Archive for required library: 'C:/Users/Administrator/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.27/tomcat-embed-core-8.5.27.jar' in project 'demo5' cannot be read or is not a valid ZIP file	demo5		Build path	Build Path Problem
+
+Description	Resource	Path	Location	Type
+Archive for required library: 'C:/Users/Administrator/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.27/tomcat-embed-core-8.5.27.jar' in project 'demo5' cannot be read or is not a valid ZIP file	demo5		Build path	Build Path Problem
+
+
+<dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+
+
+Description	Resource	Path	Location	Type
+Archive for required library: 'C:/Users/Administrator/.m2/repository/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar' in project 'MyTest' cannot be read or is not a valid ZIP file	MyTest		Build path	Build Path Problem
+Description	Resource	Path	Location	Type
+The project cannot be built until build path errors are resolved	MyTest		Unknown	Java Problem
+
+Description	Resource	Path	Location	Type
+The container 'Maven Dependencies' references non existing library 'C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar'	MyTest		Build path	Build Path Problem
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

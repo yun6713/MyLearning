@@ -1,0 +1,134 @@
+spring boot基于注解，通过继承父模板实现简化配置；pom文件通过网站生成获取(可直接创建maven文件，而后在网站http://start.spring.io填写参数，获取pom文件内容)。生成pom文件后，maven自动下载相关jar包，spring boot中集成了tomcat的jar包，可不用另外安装。下载jar包可能出错，报错时删除相关jar包，update maven项目，重新下载即可。
+主要注解：@SpringBootApplication(@ComponentScan,@Configuration,@EnableAutoConfiguration),@RestController,@ImportResource,@Bean,@Value
+其他注解：@Component,@Controller,@Service,@RequestMapping,@ResponseBody,@AutoWired/@Qualifier,@RequestParam,@PathVariable
+JPA注解：@Entity/@Table,@MappedSupperClass,@NoRepositoryBean,@Column,@Id,@GeneratedValue,@Transient,@JsonIgnore
+异常处理：@ControllerAdvice,@ExceptionHandler
+
+不想将spring-boot-starter-parent作为父pom时，可通过dependencyManagement-dependencies-dependency导入。
+spring-boot-maven-plugin插件？mvn package打包项目，生成两个文件.jar，.jar.original；mvn spring-boot:run，直接使用tomcat启动项目。
+spring-Loaded，热部署；mvn spring-boot:run启动支持热部署。类编译后才能生效。
+启动项目，SpringApplication.run(a.class,args);new SpringApplication(a.class).run(args);new SpringApplicationBuilder().showBanner(false).sources(a.class).run(args);
+
+Spring Boot参数配置
+1，命令行参数，通过"--name=value"传递；java -jar app.jar --name="Spring" --server.port=8080
+2,java系统属性，通过"-Dname=value"传递；java -Dname="hello" -jar app.jar --name="hi";name=hi。可配置的属性都一样，优先级不同
+3，操作系统环境变量。？？？
+4，RandomValuePropertySource配置的random.*属性值。my.secret=${random.int[1024,65535]}；随机数，random.int,random.long等
+5，classpath的/config目录、根目录下的application配置文件；jar包外优先于包内。
+6，自定义配置文件，spring.config.location=:classpath:/default.properties,classpath:/override.properties。spring.config.location为环境变量，需在启动spring时传入，即通过命令行方式设置。
+7，加载多个不同配置；配置文件名满足application-{profile}.properties格式，通过spring.profile.active=a,b,c，来选择加载的配置文件。
+8，new SpringApplication(Application.class).setDefaultProperties(new HashMap());设置默认值
+配置文件属性值注入
+@Value("${a}")，注入application中的值。
+@ConfigurationProperties(prefix="spring")，加载application中spring实例的属性；@PropertySource，加载自定义配置文件；@Autowired，自动装配；@Component，添加到扫描。
+
+spring boot返回页面，
+在application.yml中spring下添加：thymeleaf: prefix: classpath:/templates
+pom中添加依赖：spring-boot-starter-thymeleaf
+网页模板(动态网页)放resource目录templates下，静态资源放static下。
+Controller返回网页名；不用jsp
+
+在Spring中注入类都是使用配置文件的方式，在Spring Boot中是使用注解的方式
+
+添加用户？
+
+mysql -h 192.168.1.123 -P 3306 -u idsbase -pidsbasemysql
+
+
+
+CREATE TABLE `sys_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `available` bit(1) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `sys_permission` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `available` bit(1) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `parent_id` bigint(20) DEFAULT NULL,
+  `parent_ids` varchar(255) DEFAULT NULL,
+  `permission` varchar(255) DEFAULT NULL,
+  `resource_type` enum('menu','button') DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_info` (
+  `uid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `state` tinyint(4) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `UK_f2ksd6h8hsjtd57ipfq9myr64` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `sys_role_permission` (
+  `role_id` bigint(20) NOT NULL,
+  `permission_id` bigint(20) NOT NULL,
+  CONSTRAINT `FK9q28ewrhntqeipl1t04kh1be7` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`),
+  CONSTRAINT `FKomxrs8a388bknvhjokh440waq` FOREIGN KEY (`permission_id`) REFERENCES `sys_permission` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+  KEY `FKomxrs8a388bknvhjokh440waq` (`permission_id`),
+  KEY `FK9q28ewrhntqeipl1t04kh1be7` (`role_id`),
+
+CREATE TABLE `sys_user_role` (
+  `role_id` bigint(20) NOT NULL,
+  `uid` bigint(20) NOT NULL,
+  CONSTRAINT `FKhh52n8vd4ny9ff4x9fb8v65qx` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`),
+  CONSTRAINT `FKgkmyslkrfeyn9ukmolvek8b8f` FOREIGN KEY (`uid`) REFERENCES `user_info` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+  KEY `FKgkmyslkrfeyn9ukmolvek8b8f` (`uid`),
+  KEY `FKhh52n8vd4ny9ff4x9fb8v65qx` (`role_id`),
+
+CREATE TABLE `sys_role_permission` ( `role_id` bigint(20) NOT NULL, `permission_id` bigint(20) NOT NULL, KEY `FKomxrs8a388bknvhjokh440waq` (`permission_id`), KEY `FK9q28ewrhntqeipl1t04kh1be7` (`role_id`), CONSTRAINT `FK9q28ewrhntqeipl1t04kh1be7` FOREIGN KEY (`role_id`) REFERENCES `s ys_role` (`id`), CONSTRAINT `FKomxrs8a388bknvhjokh440waq` FOREIGN KEY (`permission_id`) REFEREN CES `sys_permission` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 [50004-196]
+2018-03-05 10:22:15.617  INFO 4848 --- [           main] utoConfigurationReportLoggingInitializer : 
+
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-03-05 10:22:15.625 ERROR 4848 --- [           main] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in class path resource [com/bonc/shiro/ShiroConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [com/bonc/shiro/ShiroConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [com/bonc/shiro/ShiroConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.mgt.SecurityManager]: Factory method 'securityManager' threw exception; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myShiroRealm': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userInfoServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userInfoRepository': Cannot create inner bean '(inner bean)#56ac5c80' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#56ac5c80': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration': Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Tomcat.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceInitializer': Invocation of init method failed; nested exception is org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #4 of class path resource [init.sql]: CREATE TABLE `sys_role_permission` ( `role_id` bigint(20) NOT NULL, `permission_id` bigint(20) NOT NULL, KEY `FKomxrs8a388bknvhjokh440waq` (`permission_id`), KEY `FK9q28ewrhntqeipl1t04kh1be7` (`role_id`), CONSTRAINT `FK9q28ewrhntqeipl1t04kh1be7` FOREIGN KEY (`role_id`) REFERENCES `s ys_role` (`id`), CONSTRAINT `FKomxrs8a388bknvhjokh440waq` FOREIGN KEY (`permission_id`) REFEREN CES `sys_permission` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; nested exception is org.h2.jdbc.JdbcSQLException: Unknown data type: "FKOMXRS8A388BKNVHJOKH440WAQ"; SQL statement:
+CREATE TABLE `sys_role_permission` ( `role_id` bigint(20) NOT NULL, `permission_id` bigint(20) NOT NULL, KEY `FKomxrs8a388bknvhjokh440waq` (`permission_id`), KEY `FK9q28ewrhntqeipl1t04kh1be7` (`role_id`), CONSTRAINT `FK9q28ewrhntqeipl1t04kh1be7` FOREIGN KEY (`role_id`) REFERENCES `s ys_role` (`id`), CONSTRAINT `FKomxrs8a388bknvhjokh440waq` FOREIGN KEY (`permission_id`) REFEREN CES `sys_permission` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 [50004-196]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
