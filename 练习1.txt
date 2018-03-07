@@ -31,7 +31,7 @@ jsp页面：注释掉thymeleaf，导包、配置前缀后缀；无法显示HTML页面
 window命令处理程序已停止工作？？？
 
 
-git,maven打包、插件、pom文件标签
+git,maven打包、插件
 
 springboot maven打包：配置maven插件，
   <plugin>
@@ -43,6 +43,10 @@ springboot maven打包：配置maven插件，
     </configuration>
   </plugin>
 maven clean package；打包好的文件位于target目录下；java -jar MyWork.jar，运行打包文件。
+
+pom文件标签
+
+pom文件报错，删除repository中相关包；maven-update
 
 init.sql不能执行，可建表？
 指定data属性时，表可创建，但无法插入sql
@@ -77,10 +81,14 @@ dos查看文件，dir /s,/w,/p
 
 多线程？
 
-用户修改，删除；session管理用户登录
+用户修改，删除；
+session管理用户登录
 获取session，Session session = SecurityUtils.getSubject().getSession();
-从session获取用户
+从session.getAttribute()获取用户
 session.stop();删除登录session
+传参获取session；报错，不可行。
+cookie-jsessionid传递session。访问login界面时，cookie中包含jsessionid；login后，重定向页面时自动更改cookie-jsessionid
+
 
 springboot动态页面，thymeleaf。
 
@@ -92,7 +100,7 @@ private static Logger log = LoggerFactory.getLogger(类名.class);
 
 同一账号不能重复登录
 
-
+权限管理--父权限，controller设置多权限
 
 
 
