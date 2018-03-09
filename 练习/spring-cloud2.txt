@@ -1,0 +1,3 @@
+将MyWork整合到Spring Cloud框架中；
+三个服务：userInfo、shiro、quartz
+配置从github抓取
