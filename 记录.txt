@@ -34,6 +34,7 @@ Controller返回网页名；不用jsp
 
 mysql -h 192.168.1.123 -P 3306 -u idsbase -pidsbasemysql
 
+mysql -h 134.0.133.222 -P 3306 -u xjf -p123456
 
 
 CREATE TABLE `sys_role` (
