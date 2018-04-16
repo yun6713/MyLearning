@@ -8,4 +8,3 @@ http请求地址和资源文件映射如下:
 以neo-config-dev.properties为例子，它的application是neo-config，profile是dev。client会根据填写的参数来选择读取对应的配置
 
 文件模板何处配置？？？配置文件.
-2018年3月29日11:32:30
