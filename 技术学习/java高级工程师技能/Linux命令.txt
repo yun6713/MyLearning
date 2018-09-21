@@ -1,0 +1,45 @@
+man，查询命令，如：man ps
+ps，显示进程
+kill，杀死进程
+grep，筛选
+find，查找
+cp，复制
+mv，移动
+rm，删除
+touch，创建问价
+mkdir，创建目录
+file，显示文件基本数据
+tree，查看文件目录树
+tar，-xvf解压，-cvf压缩
+zip/unzip，压缩/解压
+cat/tac，查看文件
+chgrp，改变属组
+chown，改变所有者
+chmod，改变权限
+vim/vi，文本编辑
+time，测算命令执行时间，time ps axu
+tail，从尾部查看文件
+scp，远程复制文件，scp url1 url2
+curl，
+wget，
+make，
+make install，
+df，磁盘使用情况
+du，显示文件/目录大小
+diff，比较文件
+date/cal，时间/日历
+route，路由操作
+ifconfig，IP信息
+netstat，显示网络状态
+echo，打印
+shutdown，关机
+reboot，重启
+用户操作：useradd name、userdel name、password name、su name
+
+
+
+
+
+
+
+
